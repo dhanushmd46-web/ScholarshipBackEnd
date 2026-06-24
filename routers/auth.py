@@ -13,7 +13,7 @@ PERMANENT_ADMINS = ["DavidSamson"]
 class UserRegister(BaseModel):
     username: str
     password: str
-    role: str = "student"
+    role: str = "user"
 
 class UserLogin(BaseModel):
     username: str
@@ -36,7 +36,7 @@ def register(user: UserRegister, db: Session = Depends(get_db)):
     if user.username in PERMANENT_ADMINS:
         assigned_role = "admin"
     else:
-        assigned_role = "student"
+        assigned_role = "user"
         
     new_user = UserTable(
         username=user.username,
